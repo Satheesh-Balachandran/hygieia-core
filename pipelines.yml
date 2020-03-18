@@ -17,7 +17,7 @@ pipelines:
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
-            - name: PublicGitHub
+            - name: hygieiaCoreSatheeshGit
           integrations:
             - name: satheeshart
           runtime:
