@@ -13,7 +13,7 @@ pipelines:
         type: MvnBuild
         configuration:
           sourceLocation: .
-          mvnCommand: clean install
+          mvnCommand: clean install -ntp
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
