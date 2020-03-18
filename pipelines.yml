@@ -1,5 +1,5 @@
 resources:
-  - name: hygieia-core-satheesh-git
+  - name: hygieiaCoreSatheeshGit
     type: GitRepo
     configuration:
       path: Satheesh-Balachandran/hygieia-core
