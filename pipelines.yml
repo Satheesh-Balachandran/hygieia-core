@@ -13,7 +13,7 @@ pipelines:
         type: MvnBuild
         configuration:
           sourceLocation: .
-          mvnCommand: clean install -Dmaven.repo.local=$HOME/tmp
+          mvnCommand: clean install -Dmaven.repo.local=/tmp
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
