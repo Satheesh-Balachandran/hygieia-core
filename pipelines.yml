@@ -7,7 +7,7 @@ resources:
       branches:
         include: master
 pipelines:
-  - name: mvn_build_sample
+  - name: hygieia_core_build
     steps:
       - name: mvn_build
         type: MvnBuild
