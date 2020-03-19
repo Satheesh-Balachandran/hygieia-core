@@ -12,6 +12,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A {@link CollectorItem} repository
@@ -33,6 +34,9 @@ public interface CollectorItemRepository extends BaseCollectorItemRepository<Col
     @Query(value="{ 'collectorId' : ?0, options.url : {$regex : '^?1$', $options: 'i'}, options.branch : {$regex : '^?2$', $options: 'i'}, enabled : ?3}")
     CollectorItem findRepoByUrlAndBranch(ObjectId collectorId, String url, String branch, boolean enabled);
 
+    @Query(value = "{ 'collectorId' : ?0, options.url : {$regex : '^?1$', $options: 'i'}, options.branch : {$regex : '^?2$', $options: 'i'}}")
+    CollectorItem findRepoByUrlAndBranch(ObjectId collectorId, String url, String branch);
+
     @Query(value="{ 'collectorId': { $in: ?0 }, ?1 : {$regex : '.*?2.*', $options: 'i'}}")
     Page<CollectorItem> findByCollectorIdAndSearchField(List<ObjectId> collectorId, String searchField, String searchFieldValue, Pageable pageable);
 
@@ -44,6 +48,9 @@ public interface CollectorItemRepository extends BaseCollectorItemRepository<Col
 
     @Query(value="{'options.projectId' : ?0}")
     CollectorItem findByJiraProjectId(String projectId);
+
+    @Query(value ="{'options.artifactName': ?0, 'options.path': ?1}")
+    List<CollectorItem> findByArtifactNameAndPath(String artifactName, String path);
 
     List<CollectorItem> findByDescription(String description);
 
@@ -64,7 +71,7 @@ public interface CollectorItemRepository extends BaseCollectorItemRepository<Col
         PathBuilder<CollectorItem> path = new PathBuilder<>(CollectorItem.class, "collectorItem");
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(path.get("collectorId", ObjectId.class).in(collectorIds));
-        options.forEach((key, value) -> builder.and(path.get("options", Map.class).get(key, Object.class).eq(value)));
+        options.forEach((key, value) -> builder.and(Objects.isNull(value)?path.get("options", Map.class).get(key, Object.class).isNull():path.get("options", Map.class).get(key, Object.class).eq(value)));
         return findAll(builder.getValue());
     }
 }
