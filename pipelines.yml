@@ -3,7 +3,7 @@ resources:
     type: GitRepo
     configuration:
       path: Satheesh-Balachandran/hygieia-core
-      gitProvider: PublicGitHub
+      gitProvider: GitHub
       branches:
         include: master
 pipelines:
