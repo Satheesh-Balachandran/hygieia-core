@@ -2,11 +2,11 @@ resources:
   - name: webhook
     type: IncomingWebhook
     configuration:
-      webhookName: incoming_webhook
+      webhookName: webhook
   - name: aql
     type: Aql
     configuration:
-      sourceArtifactory: satheeshart
+      sourceArtifactory: artifactory
       query: items.find({"name":"${distribution_filename}"})
 pipelines:
   - name: dummy_build
