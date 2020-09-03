@@ -28,6 +28,25 @@ pipelines:
             - read_json payload.json "data.name"
             - add_run_variables distribution_filename=$(read_json payload.json "data.name")
             - echo $distribution_filename
+      - name: bundle
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: sadfhgjsadgfjkkl
+          releaseBundleVersion: v1.0.0
+          dryRun: false
+          sign: false
+          description: "some random test description"
+          inputResources:
+            - name: aql
+              trigger: true
+          outputResources:
+            - name: release_bundle
+          releaseNotes:
+            syntax: markdown
+            content: |
+              ## Heading
+                * Bullet
+                * Points
       - name: trigger_by_aql
         type: Bash
         configuration:
