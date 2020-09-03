@@ -31,7 +31,6 @@ pipelines:
       - name: trigger_by_aql
         type: Bash
         configuration:
-          description: "PLEASE RUN"
           inputResources:
             - name: aql
               trigger: true
