@@ -18,7 +18,7 @@ resources:
     type: ReleaseBundle
     configuration:
       sourceDistribution: distribution
-      name: sadfhgjsadgfjkkl
+      name: mygenericbundle
       version: v2.0.1
   - name: distribution_rules
     type: DistributionRule
@@ -52,7 +52,7 @@ pipelines:
       - name: bundle
         type: CreateReleaseBundle
         configuration:
-          releaseBundleName: sadfhgjsadgfjkkl
+          releaseBundleName: mygenericbundle
           releaseBundleVersion: v2.0.1
           dryRun: false
           sign: true
