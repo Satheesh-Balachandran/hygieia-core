@@ -28,3 +28,13 @@ pipelines:
             - read_json payload.json "data.name"
             - add_run_variables distribution_filename=$(read_json payload.json "data.name")
             - echo $distribution_filename
+      - name: trigger_by_aql
+        type: Bash
+        configuration:
+          description: "PLEASE RUN"
+          inputResources:
+            - name: aql
+              trigger: true
+        execution:
+          onExecute:
+            - echo "I HAVE RAN SUCCESSFULLY FROM TRIGGER BY AQL!"
