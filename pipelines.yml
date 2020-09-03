@@ -6,6 +6,10 @@ resources:
       gitProvider: GitHub
       branches:
         include: master
+  - name: webhook
+    type: IncomingWebhook
+    configuration:
+      webhookName: incoming_webhook
 pipelines:
   - name: hygieia_core_build
     steps:
@@ -19,7 +23,7 @@ pipelines:
           inputResources:
             - name: hygieiaCoreSatheeshGit
           integrations:
-            - name: satheeshart
+            - name: webhook
           runtime:
             type: image
             image:
