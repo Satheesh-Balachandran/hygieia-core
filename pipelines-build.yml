@@ -1,0 +1,32 @@
+resources:
+  - name: hygieiaCoreSatheeshGit
+    type: GitRepo
+    configuration:
+      path: Satheesh-Balachandran/hygieia-core
+      gitProvider: GitHub
+      branches:
+        include: master
+pipelines:
+  - name: hygieia_core_build
+    steps:
+      - name: mvn_build
+        type: MvnBuild
+        configuration:
+          sourceLocation: .
+          mvnCommand: clean install -Dmaven.repo.local=/tmp
+          configFileLocation: .
+          configFileName: mvn-art-config
+          inputResources:
+            - name: hygieiaCoreSatheeshGit
+          integrations:
+            - name: satheeshart
+          runtime:
+            type: image
+            image:
+              auto:
+                language: java
+                versions:
+                  - "11"
+        execution:
+          onStart:
+            - javac -version
