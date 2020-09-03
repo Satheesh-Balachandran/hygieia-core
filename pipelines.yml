@@ -39,8 +39,6 @@ pipelines:
           inputResources:
             - name: aql
               trigger: true
-          outputResources:
-            - name: release_bundle
           releaseNotes:
             syntax: markdown
             content: |
