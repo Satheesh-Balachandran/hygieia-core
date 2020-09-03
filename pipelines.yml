@@ -11,19 +11,19 @@ resources:
   - name: release_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: StDistribution
-      name: sadfhgjsadgfjkkl
-      version: v2.0.0
+      sourceDistribution: distribution
+      name: 
+      version: v2.0.1
   - name: signed_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: StDistribution
+      sourceDistribution: distribution
       name: sadfhgjsadgfjkkl
-      version: v2.0.0
+      version: v2.0.1
   - name: distribution_rules
     type: DistributionRule
     configuration:
-      sourceDistribution: StDistribution
+      sourceDistribution: distribution
       serviceName: "*"
       siteName: "*"
       cityName: "*"
@@ -53,9 +53,9 @@ pipelines:
         type: CreateReleaseBundle
         configuration:
           releaseBundleName: sadfhgjsadgfjkkl
-          releaseBundleVersion: v2.0.0
+          releaseBundleVersion: v2.0.1
           dryRun: false
-          sign: false
+          sign: true
           description: "some random test description"
           inputResources:
             - name: aql
@@ -65,9 +65,8 @@ pipelines:
           releaseNotes:
             syntax: markdown
             content: |
-              ## Heading
-                * Bullet
-                * Points
+              ## This is a test distribution bundle
+                * This is generated upon deploy of each artifact in generic-local
       - name: sign
         type: SignReleaseBundle
         configuration:
