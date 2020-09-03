@@ -8,6 +8,21 @@ resources:
     configuration:
       sourceArtifactory: artifactory
       query: items.find({"name":"${distribution_filename}"})
+  - name: signed_bundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: StDistribution
+      name: sadfhgjsadgfjkkl
+      version: v1.0.0
+  - name: distribution_rules
+    type: DistributionRule
+    configuration:
+      sourceDistribution: StDistribution
+      serviceName: "*"
+      siteName: "*"
+      cityName: "*"
+      countryCodes:
+        - "US"
 pipelines:
   - name: dummy_build
     steps:
@@ -45,12 +60,17 @@ pipelines:
               ## Heading
                 * Bullet
                 * Points
-      - name: trigger_by_aql
-        type: Bash
+      - name: sign
+        type: SignReleaseBundle
         configuration:
           inputResources:
-            - name: aql
-              trigger: true
-        execution:
-          onExecute:
-            - echo "I HAVE RAN SUCCESSFULLY FROM TRIGGER BY AQL!"
+            - name: release_bundle
+          outputResources:
+            - name: signed_bundle
+      - name: distribute
+        type: DistributeReleaseBundle
+        configuration:
+          dryRun: false
+          inputResources:
+            - name: signed_bundle
+            - name: distribution_rules
