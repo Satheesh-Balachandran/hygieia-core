@@ -11,19 +11,19 @@ resources:
   - name: release_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: MyDistribution
+      sourceDistribution: clouddistribution
       name: mygenericbundle
       version: v2.0.1
   - name: signed_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: MyDistribution
+      sourceDistribution: clouddistribution
       name: mygenericbundle
       version: v2.0.1
   - name: distribution_rules
     type: DistributionRule
     configuration:
-      sourceDistribution: MyDistribution
+      sourceDistribution: clouddistribution
       serviceName: "*"
       siteName: "*"
       cityName: "*"
@@ -56,7 +56,7 @@ pipelines:
           releaseBundleVersion: v2.0.1
           dryRun: false
           sign: true
-          description: "some random test description"
+          description: "Creates generic repo release bundle"
           inputResources:
             - name: aql
               trigger: true
