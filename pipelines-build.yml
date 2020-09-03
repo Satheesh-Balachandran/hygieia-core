@@ -1,5 +1,5 @@
 resources:
-  - name: hygieiaCoreSatheeshGit
+  - name: gitresource
     type: GitRepo
     configuration:
       path: Satheesh-Balachandran/hygieia-core
@@ -17,9 +17,9 @@ pipelines:
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
-            - name: hygieiaCoreSatheeshGit
+            - name: gitresource
           integrations:
-            - name: satheeshart
+            - name: artifactory
           runtime:
             type: image
             image:
