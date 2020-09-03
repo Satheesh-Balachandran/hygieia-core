@@ -7,7 +7,7 @@ resources:
     type: Aql
     configuration:
       sourceArtifactory: satheeshart
-      query: items.find({"name":"emea_3_9.txt"})
+      query: items.find({"name":"${distribution_filename}"})
 pipelines:
   - name: dummy_build
     steps:
