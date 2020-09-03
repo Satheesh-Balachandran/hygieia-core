@@ -1,36 +1,16 @@
 resources:
-  - name: hygieiaCoreSatheeshGit
-    type: GitRepo
-    configuration:
-      path: Satheesh-Balachandran/hygieia-core
-      gitProvider: GitHub
-      branches:
-        include: master
   - name: webhook
     type: IncomingWebhook
     configuration:
       webhookName: incoming_webhook
 pipelines:
-  - name: hygieia_core_build
+  - name: dummy_build
     steps:
-      - name: mvn_build
-        type: MvnBuild
+      - name: bashScript
+        type: Bash
         configuration:
-          sourceLocation: .
-          mvnCommand: clean install -Dmaven.repo.local=/tmp
-          configFileLocation: .
-          configFileName: mvn-art-config
           inputResources:
             - name: webhook
-          integrations:
-            - name: satheeshart
-          runtime:
-            type: image
-            image:
-              auto:
-                language: java
-                versions:
-                  - "11"
         execution:
-          onStart:
-            - javac -version
+          onExecute:
+            - echo "I HAVE RAN SUCCESSFULLY!"
