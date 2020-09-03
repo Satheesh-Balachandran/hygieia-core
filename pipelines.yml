@@ -14,3 +14,10 @@ pipelines:
         execution:
           onExecute:
             - echo "I HAVE RAN SUCCESSFULLY!"
+            - set_payload webhook "$res_webhook_payload"
+            - echo "$res_webhook_payload" | jq '.' > payload.json
+            - set_payload webhook payload.json --file
+            - cat payload.json
+            - read_json payload.json "data.name"
+            - add_run_variables distribution_filename=$(read_json payload.json "data.name")
+            - echo $distribution_filename
