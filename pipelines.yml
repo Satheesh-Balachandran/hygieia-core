@@ -21,9 +21,9 @@ pipelines:
           configFileLocation: .
           configFileName: mvn-art-config
           inputResources:
-            - name: hygieiaCoreSatheeshGit
-          integrations:
             - name: webhook
+          integrations:
+            - name: satheeshart
           runtime:
             type: image
             image:
