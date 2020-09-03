@@ -5,7 +5,7 @@ resources:
       path: Satheesh-Balachandran/hygieia-core
       gitProvider: GitHub
       branches:
-        include: master
+        include: develop
 pipelines:
   - name: hygieia_core_build
     steps:
