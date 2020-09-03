@@ -1,4 +1,4 @@
-## Satheesh-Balachandran/ Hygieia Core - Test.
+## Satheesh-Balachandran/ Hygieia Core - Test
 
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://img.shields.io/maven-central/v/com.capitalone.dashboard/core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.capitalone.dashboard%22%20AND%20a:%22core%22)
