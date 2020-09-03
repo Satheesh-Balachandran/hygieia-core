@@ -13,13 +13,13 @@ resources:
     configuration:
       sourceDistribution: StDistribution
       name: sadfhgjsadgfjkkl
-      version: v1.0.0
+      version: v2.0.0
   - name: signed_bundle
     type: ReleaseBundle
     configuration:
       sourceDistribution: StDistribution
       name: sadfhgjsadgfjkkl
-      version: v1.0.0
+      version: v2.0.0
   - name: distribution_rules
     type: DistributionRule
     configuration:
@@ -53,7 +53,7 @@ pipelines:
         type: CreateReleaseBundle
         configuration:
           releaseBundleName: sadfhgjsadgfjkkl
-          releaseBundleVersion: v1.0.0
+          releaseBundleVersion: v2.0.0
           dryRun: false
           sign: false
           description: "some random test description"
