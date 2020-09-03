@@ -16,6 +16,8 @@ pipelines:
         configuration:
           inputResources:
             - name: webhook
+          outputResources:
+            - name: aql
         execution:
           onExecute:
             - echo "I HAVE RAN SUCCESSFULLY!"
