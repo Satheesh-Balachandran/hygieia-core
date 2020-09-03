@@ -11,19 +11,19 @@ resources:
   - name: release_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: distribution
-      name: 
+      sourceDistribution: MyDistribution
+      name: mygenericbundle
       version: v2.0.1
   - name: signed_bundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: distribution
+      sourceDistribution: MyDistribution
       name: mygenericbundle
       version: v2.0.1
   - name: distribution_rules
     type: DistributionRule
     configuration:
-      sourceDistribution: distribution
+      sourceDistribution: MyDistribution
       serviceName: "*"
       siteName: "*"
       cityName: "*"
