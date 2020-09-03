@@ -1,83 +1,32 @@
 resources:
-  - name: webhook
-    type: IncomingWebhook
+  - name: gitresource
+    type: GitRepo
     configuration:
-      webhookName: webhook
-  - name: aql
-    type: Aql
-    configuration:
-      sourceArtifactory: artifactory
-      query: items.find({"name":"${distribution_filename}"})
-  - name: release_bundle
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: clouddistribution
-      name: mygenericbundle
-      version: v2.0.1
-  - name: signed_bundle
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: clouddistribution
-      name: mygenericbundle
-      version: v2.0.1
-  - name: distribution_rules
-    type: DistributionRule
-    configuration:
-      sourceDistribution: clouddistribution
-      serviceName: "*"
-      siteName: "*"
-      cityName: "*"
-      countryCodes:
-        - "US"
+      path: Satheesh-Balachandran/hygieia-core
+      gitProvider: GitHub
+      branches:
+        include: master
 pipelines:
-  - name: dummy_build
+  - name: hygieia_core_build
     steps:
-      - name: bashScript
-        type: Bash
+      - name: mvn_build
+        type: MvnBuild
         configuration:
+          sourceLocation: .
+          mvnCommand: clean install -Dmaven.repo.local=/tmp
+          configFileLocation: .
+          configFileName: mvn-art-config
           inputResources:
-            - name: webhook
-          outputResources:
-            - name: aql
+            - name: gitresource
+          integrations:
+            - name: artifactory
+          runtime:
+            type: image
+            image:
+              auto:
+                language: java
+                versions:
+                  - "11"
         execution:
-          onExecute:
-            - echo "I HAVE RAN SUCCESSFULLY!"
-            - set_payload webhook "$res_webhook_payload"
-            - echo "$res_webhook_payload" | jq '.' > payload.json
-            - set_payload webhook payload.json --file
-            - cat payload.json
-            - read_json payload.json "data.name"
-            - add_run_variables distribution_filename=$(read_json payload.json "data.name")
-            - echo $distribution_filename
-      - name: bundle
-        type: CreateReleaseBundle
-        configuration:
-          releaseBundleName: mygenericbundle
-          releaseBundleVersion: v2.0.1
-          dryRun: false
-          sign: false
-          description: "Creates generic repo release bundle"
-          inputResources:
-            - name: aql
-              trigger: true
-          outputResources:
-            - name: release_bundle
-          releaseNotes:
-            syntax: markdown
-            content: |
-              ## This is a test distribution bundle
-                * This is generated upon deploy of each artifact in generic-local
-      - name: sign
-        type: SignReleaseBundle
-        configuration:
-          inputResources:
-            - name: release_bundle
-          outputResources:
-            - name: signed_bundle
-      - name: distribute
-        type: DistributeReleaseBundle
-        configuration:
-          dryRun: false
-          inputResources:
-            - name: signed_bundle
-            - name: distribution_rules
+          onStart:
+            - javac -version
