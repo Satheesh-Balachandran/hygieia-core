@@ -8,6 +8,12 @@ resources:
     configuration:
       sourceArtifactory: artifactory
       query: items.find({"name":"${distribution_filename}"})
+  - name: release_bundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: StDistribution
+      name: sadfhgjsadgfjkkl
+      version: v1.0.0
   - name: signed_bundle
     type: ReleaseBundle
     configuration:
@@ -54,6 +60,8 @@ pipelines:
           inputResources:
             - name: aql
               trigger: true
+          outputResources:
+            - name: release_bundle
           releaseNotes:
             syntax: markdown
             content: |
